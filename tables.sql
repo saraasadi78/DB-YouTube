@@ -8,7 +8,7 @@ CREATE TABLE users (
 	
 CREATE TABLE video (
     id int NOT NULL primary key,
-    name varchar(20) NOT NULL,
+    name varchar(200) NOT NULL,
     uploadDate date NOT NULL,
 	duration int NOT NULL,
 	description varchar(100) NOT NULL,

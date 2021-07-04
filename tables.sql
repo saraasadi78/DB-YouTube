@@ -1,62 +1,111 @@
 CREATE TABLE users (
-    username varchar(20) NOT NULL PRIMARY KEY,
+    username varchar(20) NOT NULL,
 	email varchar(50) NOT NULL,
-	password varchar(20) NOT NULL,
-	membershipDate date NOT NULL,
-	profileimage varchar(200) 
-	);
-	
-CREATE TABLE video (
-    id int NOT NULL primary key,
-    name varchar(200) NOT NULL,
-    uploadDate date NOT NULL,
-	duration int NOT NULL,
-	description varchar(100) NOT NULL,
-	thumbnailimage varchar(200) NOT NULL
-	);
+	password varchar(80) NOT NULL,
+	membership_date date NOT NULL,
+	profile_image varchar(200),
+	PRIMARY KEY (username)
+);
 	
 CREATE TABLE channel (
-    id int NOT NULL primary key,
+    channel_id SERIAL,
     name varchar(20) NOT NULL,
-    creationDate date NOT NULL,
-	description varchar(100) NOT NULL,
-	image varchar(200) NOT NULL
-	);
+    creation_date date NOT NULL,
+	description varchar(100),
+	image varchar(200),
+	PRIMARY KEY (channel_id)
+);
 	
 CREATE TABLE user_channel (
-	id int NOT NULL,
+	id SERIAL,
 	username varchar(20) NOT NULL,
-	channelid int NOT NULL
-   	);		
-	
-CREATE TABLE playlist_video (
-    id int NOT NULL primary key,
-    name varchar(20) NOT NULL,
-    playlistid int NOT NULL,
-	videoid int NOT NULL
-	);
-	
-CREATE TABLE watch (
-    username varchar(20) NOT NULL,
-    videoid int NOT NULL,
-	liked bool NOT NULL,
-	commentid int NOT NULL
-	);
-	
-CREATE TABLE comment_txt (
-	commentid int NOT NULL primary key,
-	videoid int,
-	userid varchar(20),
-	parentcommentid int NOT NULL,
-	text varchar(1000) NOT NULL
-   	);
-		
+	channel_id int NOT NULL,
+	PRIMARY KEY (id),
+	CONSTRAINT fk_user
+      FOREIGN KEY(username) 
+	  REFERENCES users(username)
+	  ON DELETE CASCADE,
+	CONSTRAINT fk_channel
+      FOREIGN KEY(channel_id) 
+	  REFERENCES channel(channel_id)
+	  ON DELETE CASCADE
+);
+
+
+CREATE TABLE video (
+    video_id SERIAL,
+	channel_id int NOT NULL,
+    name varchar(200) NOT NULL,
+    upload_date date NOT NULL,
+	duration int NOT NULL,
+	description varchar(100) NOT NULL,
+	thumbnail_image varchar(200) NOT NULL,
+	PRIMARY KEY (video_id),
+	CONSTRAINT fk_channel
+      FOREIGN KEY(channel_id) 
+	  REFERENCES channel(channel_id)
+	  ON DELETE SET NULL
+);
+
+
 CREATE TABLE playlist (
-    id int NOT NULL primary key,
+    playlist_id SERIAL,
 	name varchar(20),
     username varchar(20) NOT NULL,
-	ispublic bool
-	);
+	is_public boolean NOT NULL default false,
+	PRIMARY KEY (playlist_id),
+	CONSTRAINT fk_user
+      FOREIGN KEY(username) 
+	  REFERENCES users(username)
+	  ON DELETE CASCADE
+);
+	
+CREATE TABLE playlist_video (
+    id SERIAL,
+    playlist_id int NOT NULL,
+	video_id int NOT NULL,
+	PRIMARY KEY (id),
+	CONSTRAINT fk_playlist
+      FOREIGN KEY(playlist_id) 
+	  REFERENCES playlist(playlist_id)
+	  ON DELETE CASCADE,
+	CONSTRAINT fk_video
+      FOREIGN KEY(video_id) 
+	  REFERENCES video(video_id)
+	  ON DELETE CASCADE
+
+);
+	
+
+CREATE TABLE comment (
+	comment_id SERIAL,
+	text varchar(300) NOT NULL,
+	parent_comment_id int,
+	PRIMARY KEY (comment_id)
+);
+
+CREATE TABLE watch (
+	id SERIAL,
+    username varchar(20) NOT NULL,
+    video_id int NOT NULL,
+	liked boolean,
+	comment_id int,
+	PRIMARY KEY (id),
+	CONSTRAINT fk_user
+      FOREIGN KEY(username) 
+	  REFERENCES users(username)
+	  ON DELETE SET NULL,
+	CONSTRAINT fk_video
+      FOREIGN KEY(video_id) 
+	  REFERENCES video(video_id)
+	  ON DELETE CASCADE,
+	CONSTRAINT fk_comment
+      FOREIGN KEY(comment_id) 
+	  REFERENCES comment(comment_id)
+	  ON DELETE SET NULL
+);
+	
+		
 		
 	
 	

@@ -6,8 +6,8 @@ insert into channel values (7896,'TheEllenshow','2010/02/09','netflix','ellen.pn
 insert into channel values (7897,'JimmyKimmelLive','2011/06/12','abc','jimmy.png');
 insert into channel values (7899,'TheLateLateShow','2012/06/17','cbs','jamescorden.png');
 
-insert into comment_txt values (987654,14865,'saraasadi78',987653,'it was awsome');
-insert into comment_txt values (987653,14866,'aminerf77',987651,'lmao');
+insert into comment values (987654,14865,'saraasadi78',987653,'it was awsome');
+insert into comment values (987653,14866,'aminerf77',987651,'lmao');
 
 insert into playlist values (963852,'fun','aminerf77',true);
 insert into playlist values (413146,'game','saraasadi78',false);

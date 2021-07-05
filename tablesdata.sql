@@ -23,3 +23,12 @@ insert into video values (16987813,'restore whatsapp backup','2021/04/30',60,'To
 
 insert into watch values ('saraasadi78',66558899,true,987654);
 insert into watch values ('aminerf77',66558899,true,987653);
+
+insert into users values ('AmeliaMargaret','Margaret@x.com','jzxcvb','2010/08/13','Marg.png');
+insert into users values ('OliviaJones','Jones@x.com','98jnve','2020/02/08','Jon.png');
+insert into users values ('SophieBrown','SophieBrown@x.com','pokjn55ve','2007/07/23','sof.png');
+insert into users values ('LilyTaylor','LilyTaylor@x.com','9915fh','2014/06/24','Jon.png');
+insert into users values ('IsabellaEvans','IsabellaEvans@x.com','zxcvbn85','2009/08/20','lil.png');
+insert into users values ('EmilyOConnor','EmilyOConnor@x.com','sdfghj9541','2005/09/19','conner.png');
+insert into users values ('KyleByrne','KyleByrne@x.com','fghjkmnb585','2004/10/16','kyle.png');
+insert into users values ('JessicaMiller','JessicaMiller@x.com','98745685','2003/11/04','mill.png');
